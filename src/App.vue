@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+    <transition name="slide-fade">
+      <notification
+      v-if="getShowMessage"
+      :message="getMessage.text"
+      :type="getMessage.type"
+      :pause="2000"
+      @close="hideMessage"
+      />
+    </transition>
     <top-menu/>
     <router-view></router-view>
     <vue-progress-bar></vue-progress-bar>
@@ -7,10 +16,13 @@
 </template>
 
 <script>
+import Notification from '@/components/Notification'
 import TopMenu from '@/components/TopMenu'
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'app',
-  components: { TopMenu },
+  components: { Notification, TopMenu },
   mounted () {
     this.$Progress.finish()
   },
@@ -27,6 +39,12 @@ export default {
     this.$router.afterEach((to, from) => {
       this.$Progress.finish()
     })
+  },
+  computed: {
+    ...mapGetters(['getShowMessage', 'getMessage'])
+  },
+  methods: {
+    ...mapActions(['hideMessage'])
   }
 }
 </script>

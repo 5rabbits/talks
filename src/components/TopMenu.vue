@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'top-menu',
   data () {
     return {
       navmenu: false

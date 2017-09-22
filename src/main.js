@@ -3,13 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 import VueProgressBar from 'vue-progressbar'
 
-Vue.use(VueProgressBar, {
-  color: 'rgb(143, 255, 199)',
-  failedColor: 'red',
-  height: '4px'
-})
+const options = {
+  color: '#3385ff',
+  failedColor: '#ff4d4d',
+  thickness: '5px'
+}
+
+Vue.use(VueProgressBar, options)
 
 Vue.config.productionTip = false
 
@@ -17,6 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
