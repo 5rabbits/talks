@@ -15,10 +15,12 @@
   },
   "dependencies": {
     "bulma": "^0.5.3",
+    "firebase": "^4.4.0",
     "font-awesome": "^4.7.0",
     "vue": "^2.4.2",
     "vue-progressbar": "^0.7.3",
     "vue-router": "^2.7.0",
+    "vuefire": "^1.4.3",
     "vuex": "^2.4.0"
   },
   "devDependencies": {
