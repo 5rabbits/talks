@@ -1,0 +1,28 @@
+@import "~bulma/sass/utilities/initial-variables";
+
+$primary: hsl(195, 100%, 40%);
+$info: $blue;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
+$dark: $grey-darker;
+$text: $grey-dark;
+
+$my-background: hsl(195, 100%, 40%);
+$my-hover-background: hsl(195, 100%, 45%);
+$my-active-background: hsl(195, 100%, 25%);
+$my-item-color: hsl(194, 100%, 95%);
+
+$navbar-background-color: $my-background;
+$navbar-height: 3.25rem;
+$navbar-item-color: $my-item-color;
+$navbar-item-hover-color: $my-item-color;
+$navbar-item-active-color: $my-item-color;
+$navbar-item-hover-background-color: $my-hover-background;
+$navbar-item-active-background-color: $my-active-background;
+$navbar-dropdown-background-color: $my-background;
+$navbar-dropdown-item-color: $my-item-color;
+$navbar-dropdown-item-hover-color: $my-item-color;
+$navbar-dropdown-item-active-color: $my-item-color;
+$navbar-dropdown-item-hover-background-color: $my-hover-background;
+$navbar-dropdown-item-active-background-color: $my-active-background;
