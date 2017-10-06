@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .over-all {
   position: fixed;
   z-index: 101;
