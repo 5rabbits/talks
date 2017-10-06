@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AuthGuard from './auth-guard'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Random from '../pages/Random'
@@ -28,7 +29,8 @@ export default new Router({
     {
       path: '/random',
       name: 'Random',
-      component: Random
+      component: Random,
+      beforeEnter: AuthGuard
     },
     {
       path: '/register',

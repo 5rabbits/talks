@@ -11,24 +11,23 @@ const getters = {
 }
 
 const actions = {
-  signUserUp ({ commit }, payload) {
+  sendValidationEmail ({commit}) {
+    let currentUser = firebase.auth().currentUser
+    currentUser.sendEmailVerification().then(() => {
+      console.log('Email verification sent')
+    }, error => {
+      console.log(error)
+    })
+  },
+  signUserUp ({ commit, dispatch }, payload) {
     firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-      .then(
-      user => {
-        const newUser = {
-          id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoUrl: user.photoURL
-        }
-        commit('setUser', newUser)
-      }
-      )
-      .catch(
-      error => {
+      .then(user => {
+        console.log(user)
+        dispatch('sendValidationEmail')
+      })
+      .catch(error => {
         console.log(error)
-      }
-      )
+      })
   },
   signUserIn ({ commit }, payload) {
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
