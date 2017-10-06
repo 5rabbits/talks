@@ -3,7 +3,7 @@ import * as types from '../mutation-types'
 // initial state
 const state = {
   message: {
-    type: '',
+    className: '',
     text: ''
   },
   showMessage: false
@@ -21,7 +21,32 @@ const getters = {
 
 // actions
 const actions = {
-  setMessage: ({commit}, message) => {
+  setError: ({commit}, payload) => {
+    let message = {
+      className: 'is-danger',
+      text: payload
+    }
+    commit(types.SET_MESSAGE, message)
+  },
+  setSuccess: ({commit}, payload) => {
+    let message = {
+      className: 'is-success',
+      text: payload
+    }
+    commit(types.SET_MESSAGE, message)
+  },
+  setWarning: ({commit}, payload) => {
+    let message = {
+      className: 'is-warning',
+      text: payload
+    }
+    commit(types.SET_MESSAGE, message)
+  },
+  setInfo: ({commit}, payload) => {
+    let message = {
+      className: 'is-info',
+      text: payload
+    }
     commit(types.SET_MESSAGE, message)
   },
   showMessage: ({commit}) => {
@@ -34,8 +59,9 @@ const actions = {
 
 // mutations
 const mutations = {
-  [types.SET_MESSAGE]: (state, message) => {
-    state.message = message
+  [types.SET_MESSAGE]: (state, payload) => {
+    state.message = payload
+    state.showMessage = true
   },
   [types.SHOW_MESSAGE]: state => {
     state.showMessage = true

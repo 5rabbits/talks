@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Random from '../pages/Random'
+import Register from '../pages/Register'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/random',
       name: 'Random',
       component: Random
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 })

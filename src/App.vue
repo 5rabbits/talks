@@ -1,13 +1,14 @@
 <template>
   <div id="app">
     <transition name="slide-fade">
-      <notification
-      v-if="getShowMessage"
-      :message="getMessage.text"
-      :type="getMessage.type"
-      :pause="2000"
-      @close="hideMessage"
-      />
+      <div v-if="getShowMessage">
+        <notification
+        :message="getMessage.text"
+        :className="getMessage.className"
+        :pause="2000"
+        @close="hideMessage"
+        />
+      </div>
     </transition>
     <top-menu/>
     <router-view></router-view>

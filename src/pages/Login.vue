@@ -2,27 +2,22 @@
   <div class="section">
     <div class="container">
       <div class="box">
-        <h1>Login</h1>
         <div class="field">
-          <a class="button is-primary" @click="fireUp">Show message</a>
+          <label class="label">E-mail</label>
+          <div class="control">
+            <input class="input" type="email" placeholder="john.doe@server.com">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input class="input" type="password">
+          </div>
+        </div>
+        <div class="control">
+          <a class="button is-primary">Ingresar</a>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import { mapActions } from 'vuex'
-
-export default {
-  methods: {
-    ...mapActions(['setMessage', 'showMessage']),
-    fireUp () {
-      let message = 'Este es un mensaje de prueba'
-      this.setMessage({type: 'is-success', text: message})
-      this.showMessage()
-    }
-  }
-}
-</script>
-

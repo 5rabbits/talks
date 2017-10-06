@@ -1,5 +1,5 @@
 <template>
-  <div class="notification over-all" :class="type">
+  <div class="notification over-all" :class="className">
     <button class="delete" @click="emitClose"></button>
     {{ message }}
   </div>
@@ -13,7 +13,7 @@ export default {
       type: String,
       default: 'This is a message'
     },
-    type: {
+    className: {
       type: String,
       default: 'is-info'
     },
@@ -26,18 +26,13 @@ export default {
     emitClose () {
       this.$emit('close')
     }
-  },
-  mounted () {
-    setInterval(() => {
-      this.emitClose()
-    }, this.pause)
   }
 }
 </script>
 
 <style scoped>
 .over-all {
-  position: fixed;
+  position:fixed;
   z-index: 101;
   top: 0;
   right: 0;
