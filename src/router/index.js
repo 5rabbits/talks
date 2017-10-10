@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AuthGuard from './auth-guard'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
+import Profile from '../pages/Profile'
 import Random from '../pages/Random'
 import Register from '../pages/Register'
 
@@ -36,6 +37,12 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile,
+      beforeEnter: AuthGuard
     }
   ]
 })

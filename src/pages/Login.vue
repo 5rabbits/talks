@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="control">
-              <a class="button is-primary" @click="login">Ingresar</a> o
+              <a class="button is-primary" @click="login">Ingresar</a> o <a class="button is-link" @click="loginGoogle">iniciar con Google</a>
             </div>
           </div>
         </div>
@@ -49,6 +49,14 @@
     methods: {
       login () {
         this.$store.dispatch('signUserIn', this.user)
+      },
+      loginGoogle () {
+        this.$store.dispatch('signUserInGoogle')
+      }
+    },
+    computed: {
+      current () {
+        return this.$store.getters.user
       }
     }
   }
