@@ -1,11 +1,11 @@
 <template>
   <div id="app">
+    <loading v-if="loading"/>
     <transition name="slide-fade">
       <div v-if="getShowMessage">
         <notification
         :message="getMessage.text"
         :className="getMessage.className"
-        :pause="2000"
         @close="hideMessage"
         />
       </div>
@@ -17,13 +17,18 @@
 </template>
 
 <script>
-import Notification from '@/components/Notification'
-import TopMenu from '@/components/TopMenu'
+import Notification from './components/Notification'
+import TopMenu from './components/TopMenu'
+import Loading from './components/Loading'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'app',
-  components: { Notification, TopMenu },
+  components: {
+    Notification,
+    TopMenu,
+    Loading
+  },
   mounted () {
     this.$Progress.finish()
   },
@@ -42,7 +47,7 @@ export default {
     })
   },
   computed: {
-    ...mapGetters(['getShowMessage', 'getMessage'])
+    ...mapGetters(['getShowMessage', 'getMessage', 'loading'])
   },
   methods: {
     ...mapActions(['hideMessage'])

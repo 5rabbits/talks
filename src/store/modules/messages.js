@@ -21,39 +21,46 @@ const getters = {
 
 // actions
 const actions = {
-  setError: ({commit}, payload) => {
+  setError: ({commit, dispatch}, payload) => {
     let message = {
       className: 'is-danger',
       text: payload
     }
-    commit(types.SET_MESSAGE, message)
+    dispatch('setMessage', message)
   },
-  setSuccess: ({commit}, payload) => {
+  setSuccess: ({commit, dispatch}, payload) => {
     let message = {
       className: 'is-success',
       text: payload
     }
-    commit(types.SET_MESSAGE, message)
+    dispatch('setMessage', message)
   },
-  setWarning: ({commit}, payload) => {
+  setWarning: ({commit, dispatch}, payload) => {
     let message = {
       className: 'is-warning',
       text: payload
     }
-    commit(types.SET_MESSAGE, message)
+    dispatch('setMessage', message)
   },
-  setInfo: ({commit}, payload) => {
+  setInfo: ({commit, dispatch}, payload) => {
     let message = {
       className: 'is-info',
       text: payload
     }
-    commit(types.SET_MESSAGE, message)
+    dispatch('setMessage', message)
   },
   showMessage: ({commit}) => {
     commit(types.SHOW_MESSAGE)
   },
   hideMessage: ({commit}) => {
     commit(types.HIDE_MESSAGE)
+  },
+  setMessage: ({commit, dispatch}, payload) => {
+    commit(types.SET_MESSAGE, payload)
+    dispatch('showMessage')
+    setTimeout(() => {
+      dispatch('hideMessage')
+    }, 4000)
   }
 }
 
@@ -61,7 +68,6 @@ const actions = {
 const mutations = {
   [types.SET_MESSAGE]: (state, payload) => {
     state.message = payload
-    state.showMessage = true
   },
   [types.SHOW_MESSAGE]: state => {
     state.showMessage = true

@@ -16,10 +16,6 @@ export default {
     className: {
       type: String,
       default: 'is-info'
-    },
-    pause: {
-      type: Number,
-      default: 3000
     }
   },
   methods: {
@@ -36,7 +32,7 @@ export default {
   z-index: 101;
   top: 0;
   right: 0;
-  width: 600px;
+  width: 20em;
   margin-top: 1em;
   margin-right: 0.5em;
 }
