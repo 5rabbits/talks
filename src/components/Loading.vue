@@ -29,11 +29,10 @@ export default {
 h4 {
     font-size: 2em;
     font-weight: 300;
-    left: 50%;
+    left: 50%;top: 50%;
+    transform: translate(-50%, -50%);
     margin: 0;
     position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
     color: white;
   }
 </style>

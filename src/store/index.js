@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './modules/auth'
+import talks from './modules/talks'
 import messages from './modules/messages'
 import loading from './modules/loading'
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     loading,
+    talks,
     messages
   },
   strict: debug
