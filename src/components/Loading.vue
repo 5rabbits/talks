@@ -21,7 +21,7 @@ export default {
   transform: translate(-50%, -50%);
   background-color: grey;
   z-index: 100;
-  border: 15px solid #9999;
+  border: 2px solid #9999;
   border-radius: 15px;
   box-shadow: 5px 5px 15px black;
 }
