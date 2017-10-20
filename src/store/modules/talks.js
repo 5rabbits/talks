@@ -1,4 +1,6 @@
 import * as firebase from 'firebase'
+import * as _ from 'lodash'
+import * as moment from 'moment'
 import * as types from '../mutation-types'
 
 // initial state
@@ -9,7 +11,10 @@ const state = {
 // getters
 const getters = {
   talks: (state) => {
-    return state.talks
+    return _.orderBy(state.talks, ['created_at'], ['desc'])
+  },
+  userTalks: (state) => {
+
   }
 }
 
@@ -23,6 +28,8 @@ const actions = {
     })
   },
   addTalk: ({commit, dispatch, rootState}, payload) => {
+    let now = moment()
+    payload.created_at = now.format('x')
     let newTalkRef = firebase.database().ref('talks/').push()
     let newTalkKey = newTalkRef.key
     let updateData = {}

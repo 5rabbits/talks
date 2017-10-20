@@ -46,6 +46,9 @@
     computed: {
       user () {
         return this.$store.getters.user
+      },
+      talks () {
+        return this.$store.getters.talks
       }
     },
     methods: {

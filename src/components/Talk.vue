@@ -1,9 +1,7 @@
 <template>
-  <article class="card">
-    <header class="card-header">
-      <h1 class="title">{{title}}</h1>
-    </header>
-    <div class="content" v-html="content"></div>
+  <article class="box content">
+    <h1 class="title">{{title}}</h1> <small>({{date}})</small>
+    <div v-html="content"></div>
   </article>
 </template>
 
@@ -15,6 +13,10 @@
         default: ''
       },
       content: {
+        type: String,
+        default: ''
+      },
+      date: {
         type: String,
         default: ''
       }
