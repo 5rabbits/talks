@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar is-light">
     <div class="navbar-brand">
       <router-link class="navbar-item" to="/" exact>
-        5rabbits
+        <img src="/static/img/5rabbits-logo@2x.png">
       </router-link>
       <div class="navbar-burger burger" @click="toggleMenu" :class="{'is-active': navmenu}">
         <span></span>
@@ -15,14 +15,17 @@
         <router-link class="navbar-item" to="/random" exact>Random!</router-link>
       </div>
       <div class="navbar-end">
-        <router-link class="navbar-item" to="/login" exact>Login</router-link>
+        <router-link v-if="!user" class="navbar-item" to="/login" exact>Login</router-link>
+        <router-link v-else class="navbar-item" to="/profile" exact>{{user.name}}</router-link>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
+  name: 'top-menu',
   data () {
     return {
       navmenu: false
@@ -32,6 +35,9 @@ export default {
     toggleMenu () {
       this.navmenu = !this.navmenu
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>
