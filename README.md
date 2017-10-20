@@ -2,6 +2,9 @@
 
 > 5rabbits talks manager
 
+## Description
+This is a proof of concept about using a PWA (Progressive Web App) using Firebase and Vue.
+
 ## Build Setup
 
 ``` bash
@@ -25,6 +28,9 @@ npm run e2e
 
 # run all tests
 npm test
+
+# deploy
+mpm run deploy
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
