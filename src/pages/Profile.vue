@@ -11,20 +11,16 @@
        </div>
       <div class="columns">
         <div class="column is-4">
-          <user-card :name="user.name" :email="user.email" :picture="user.photoUrl"/>
+          <UserCard :name="user.name" :email="user.email" :picture="user.photoUrl"/>
         </div>
-        <div class="is-column">
+        <div class="column">
           <h3 class="title">Nueva charla</h3>
           <div class="field">
             <div class="control">
               <input class="input" type="text" placeholder="Título" v-model="talk.title">
             </div>
           </div>
-          <div class="field">
-            <div class="control">
-              <textarea class="textarea" type="text" placeholder="Contenido" v-model="talk.content"></textarea>
-            </div>
-          </div>
+          <MarkdownEditor v-model="talk.content" />
           <div class="control">
             <a class="button is-primary" @click="newTalk">Guardar</a>
           </div>
@@ -35,9 +31,10 @@
 </template>
 
 <script>
+  import MarkdownEditor from '../components/MarkdownEditor'
   import UserCard from '../components/UserCard'
   export default {
-    components: { UserCard },
+    components: { MarkdownEditor, UserCard },
     data () {
       return {
         talk: {
