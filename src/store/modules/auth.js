@@ -38,13 +38,23 @@ const actions = {
     })
   },
   updateUserProfile ({commit}, payload) {
+    if (!payload.name) {
+      console.error('Payload incorrecto')
+      console.log(payload)
+      return
+    }
     let currentUser = firebase.auth().currentUser
     let userData = {
-      displayName: payload.displayName
+      displayName: payload.name
     }
     currentUser.updateProfile(userData)
   },
   signUserUp ({ commit, dispatch }, payload) {
+    if (!payload.email || !payload.password || !payload.name) {
+      console.error('Payload incorrecto')
+      console.log(payload)
+      return
+    }
     dispatch('setLoading', true)
     firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(user => {
