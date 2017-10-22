@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AdminGuard from './admin-guard'
 import AuthGuard from './auth-guard'
+import Admin from '../pages/Admin'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Profile from '../pages/Profile'
@@ -43,6 +45,12 @@ export default new Router({
       name: 'Profile',
       component: Profile,
       beforeEnter: AuthGuard
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      beforeEnter: AdminGuard
     }
   ]
 })

@@ -13,6 +13,7 @@
     <div class="navbar-menu" :class="{'is-active': navmenu}">
       <div class="navbar-start">
         <router-link class="navbar-item" to="/random" exact>Random!</router-link>
+        <router-link v-if="roles.admin" class="navbar-item" to="/admin" exact>Admin</router-link>
       </div>
       <div class="navbar-end">
         <router-link v-if="!user" class="navbar-item" to="/login" exact>Login</router-link>
@@ -37,7 +38,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(['user', 'roles'])
   }
 }
 </script>

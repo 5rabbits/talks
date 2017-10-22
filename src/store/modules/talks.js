@@ -35,7 +35,11 @@ const actions = {
     let updateData = {}
     updateData['users/' + rootState.auth.user.id + '/talks/' + newTalkKey] = true
     updateData['talks/' + newTalkKey] = payload
-    firebase.database().ref().update(updateData)
+    firebase.database().ref().update(updateData).then(res => {
+      dispatch('setSuccess', 'Registro guardado')
+    }).catch(error => {
+      dispatch('setError', error.message)
+    })
   }
 
 }

@@ -3,7 +3,11 @@ import * as types from '../mutation-types'
 
 const state = {
   user: null,
-  emailSent: false
+  emailSent: false,
+  roles: {
+    admin: false,
+    contributor: false
+  }
 }
 
 const getters = {
@@ -12,6 +16,9 @@ const getters = {
   },
   emailSent (state) {
     return state.emailSent
+  },
+  roles (state) {
+    return state.roles
   }
 }
 
@@ -70,7 +77,7 @@ const actions = {
           emailVerified: user.emailVerified
         }
         if (user.emailVerified) {
-          commit(types.SET_USER, newUser)
+          dispatch('setUser', newUser)
           dispatch('setSuccess', 'Ha iniciado sesión')
         } else {
           dispatch('setError', 'Su correo no ha sido verificado')
@@ -98,7 +105,7 @@ const actions = {
           photoUrl: user.photoURL,
           emailVerified: user.emailVerified
         }
-        commit(types.SET_USER, newUser)
+        dispatch('setUser', newUser)
         dispatch('setLoading', false)
         dispatch('setSuccess', 'Ha iniciado sesión')
       }
@@ -111,42 +118,40 @@ const actions = {
       }
       )
   },
-  signUserInFacebook ({ commit }) {
-    let provider = new firebase.auth.FacebookAuthProvider()
-    provider.addScope('public_profile,email')
-    firebase.auth().signInWithPopup(provider)
-      .then(
-      user => {
-        console.log(user)
-        const newUser = {
-          id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          photoUrl: user.photoURL,
-          emailVerified: user.emailVerified
-        }
-        commit(types.SET_USER, newUser)
-      }
-      )
-      .catch(
-      error => {
-        console.log(error)
-      }
-      )
-  },
-  autoSignIn ({ commit }, payload) {
-    commit(types.SET_USER, {
+  autoSignIn ({ commit, dispatch }, payload) {
+    const user = {
       id: payload.uid,
       name: payload.displayName,
       email: payload.email,
       photoUrl: payload.photoURL,
       emailVerified: payload.emailVerified
-    })
+    }
+    dispatch('setUser', user)
   },
   logout ({ commit, dispatch }) {
     firebase.auth().signOut()
     commit(types.SET_USER, null)
     dispatch('setSuccess', 'Sesión finalizada')
+  },
+  setUser ({commit, dispatch}, payload) {
+    commit(types.SET_USER, payload)
+    dispatch('setRoles')
+  },
+  setRoles ({commit}) {
+    let roles = {
+      admin: false,
+      contributor: false
+    }
+    let currentUser = firebase.auth().currentUser
+    firebase.database().ref('contributors/' + currentUser.uid).once('value').then(snapshot => {
+      roles.contributor = snapshot.val() || false
+      return roles
+    }).then(roles => {
+      firebase.database().ref('admins/' + currentUser.uid).once('value').then(snapshot => {
+        roles.admin = snapshot.val() || false
+        commit(types.SET_ROLES, roles)
+      })
+    })
   }
 }
 
@@ -156,6 +161,9 @@ const mutations = {
   },
   [types.SET_EMAIL_SENT] (state, payload) {
     state.emailSent = payload
+  },
+  [types.SET_ROLES] (state, payload) {
+    state.roles = payload
   }
 }
 
