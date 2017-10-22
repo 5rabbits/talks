@@ -1,6 +1,5 @@
 import * as firebase from 'firebase'
 import * as _ from 'lodash'
-import * as moment from 'moment'
 import * as types from '../mutation-types'
 
 // initial state
@@ -28,13 +27,21 @@ const actions = {
     })
   },
   addTalk: ({commit, dispatch, rootState}, payload) => {
-    let now = moment()
-    payload.created_at = now.format('x')
+    if (!payload.title || !payload.content) {
+      console.error('payload incorrecto:')
+      console.log(payload)
+    }
+    const talk = {
+      title: payload.title,
+      content: payload.content,
+      created_at: firebase.database.ServerValue.TIMESTAMP,
+      user: rootState.auth.user.id
+    }
     let newTalkRef = firebase.database().ref('talks/').push()
     let newTalkKey = newTalkRef.key
     let updateData = {}
     updateData['users/' + rootState.auth.user.id + '/talks/' + newTalkKey] = true
-    updateData['talks/' + newTalkKey] = payload
+    updateData['talks/' + newTalkKey] = talk
     firebase.database().ref().update(updateData).then(res => {
       dispatch('setSuccess', 'Registro guardado')
     }).catch(error => {

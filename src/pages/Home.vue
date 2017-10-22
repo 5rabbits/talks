@@ -33,8 +33,7 @@ export default {
       return marked(text)
     },
     fromNow (value) {
-      let unix = value / 1000
-      return moment.unix(unix).fromNow()
+      return moment(value).fromNow()
     }
   }
 }
